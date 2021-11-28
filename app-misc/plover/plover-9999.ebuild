@@ -13,6 +13,7 @@ else
 	MY_PV="4.0.0.dev10"
 	MY_P="${PN}-${MY_PV}"
 	SRC_URI="https://github.com/openstenoproject/${PN}/archive/v${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
+	S="${WORKDIR}/${MY_P}"
 fi
 
 DESCRIPTION="Free and open source real-time stenography engine."
@@ -38,13 +39,6 @@ DEPEND="
 	dev-python/rtf_tokenize
 	dev-python/plover_stroke
 "
-
-src_unpack() {
-	if [[ "${PV}" != *9999* ]]; then
-		unpack "${MY_P}".tar.gz
-		mv -T "${MY_P}" "${P}" || die
-	fi
-}
 
 src_install() {
 	python3 setup.py install --root=${D}
